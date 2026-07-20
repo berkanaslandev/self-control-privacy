@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gizlilik Politikası — Self Control</title>
+<style>
+  :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+  body {
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    max-width: 760px; margin: 0 auto; padding: 32px 20px 80px;
+    color: #1c1c22; background: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { color: #e6e6ea; background: #16161a; }
+    a { color: #9d8cff; }
+    th { background: #22222a !important; }
+    td, th { border-color: #33333d !important; }
+    hr { border-color: #33333d; }
+    .lang a { background: #22222a; }
+  }
+  h1 { font-size: 1.7rem; margin: 0 0 4px; }
+  h2 { font-size: 1.25rem; margin: 2.2rem 0 .6rem; }
+  h3 { font-size: 1.05rem; margin: 1.4rem 0 .4rem; }
+  a { color: #5b46e5; }
+  .sub { color: #6b6b76; margin: 0 0 24px; }
+  .lang { margin: 0 0 28px; }
+  .lang a { display: inline-block; padding: 6px 12px; border-radius: 8px; background: #f0f0f4; text-decoration: none; margin-right: 8px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; display: block; overflow-x: auto; }
+  td, th { border: 1px solid #e2e2ea; padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #f6f6fa; }
+  hr { border: none; border-top: 1px solid #e2e2ea; margin: 48px 0; }
+  code { background: rgba(128,128,128,.15); padding: 1px 5px; border-radius: 4px; }
+  ul { padding-left: 22px; }
+</style>
+</head>
+<body>
+
+<div class="lang"><a href="#tr">Türkçe</a><a href="#en">English</a></div>
+
+<!-- ============================ TÜRKÇE ============================ -->
+<section id="tr">
+<h1>Gizlilik Politikası</h1>
+<p class="sub">Self Control · Yürürlük tarihi: 20 Temmuz 2026</p>
+
+<p>Self Control, OKB, panik atak, sosyal fobi ve anksiyete alanlarında öz-yardım
+sunan bir ruh sağlığı uygulamasıdır. Gizliliğine önem veriyoruz. Bu politika,
+uygulamanın hangi verileri işlediğini ve nerede sakladığını sade bir dille açıklar.</p>
+
+<h2>Kısa özet</h2>
+<ul>
+  <li><strong>Takip verilerin cihazında kalır.</strong> Ruh hali, kaygı puanı, günlük
+      yazıların, egzersiz ve endişe kayıtların yalnızca telefonunda saklanır; bize gönderilmez.</li>
+  <li><strong>Reklam yok, analytics yok, üçüncü taraf takip (tracking) SDK'sı yok.</strong></li>
+  <li><strong>Tek istisna: isteğe bağlı Sohbet.</strong> Sohbeti kullanmayı seçersen
+      takma adın ve gönderdiğin mesajlar, mesajlaşmayı sağlamak için Firebase (Google)
+      üzerinde saklanır. E-posta veya telefon numarası istemez.</li>
+  <li>Hesap oluşturmak için ad, e-posta veya telefon <strong>gerekmez</strong>.</li>
+</ul>
+
+<h2>Cihazında kalan veriler</h2>
+<p>Aşağıdakiler yalnızca cihazında oluşturulur ve saklanır (yerel ayarlar + SwiftData).
+Hiçbiri sunucuya gönderilmez, geliştirici bunları göremez.</p>
+<table>
+  <tr><th>Veri</th><th>Neden</th><th>Nerede</th></tr>
+  <tr><td>Ruh hali ve kaygı puanların</td><td>Günlük takip ve ilerleme grafikleri</td><td>Cihazda (SwiftData)</td></tr>
+  <tr><td>Günlük yazıların ve tetikleyici etiketlerin</td><td>Kendi kayıtların</td><td>Cihazda (SwiftData)</td></tr>
+  <tr><td>Egzersiz / direnç / endişe kayıtların</td><td>Alan-özel modüller ve istatistikler</td><td>Cihazda (SwiftData)</td></tr>
+  <tr><td>Adın, seçtiğin alanlar, tercihlerin, rozetlerin</td><td>Uygulamayı kişiselleştirmek</td><td>Cihazda (yerel ayarlar)</td></tr>
+  <tr><td>Hatırlatma saati</td><td>Yerel günlük hatırlatma bildirimi</td><td>Cihazda / iOS</td></tr>
+</table>
+<p>Uygulama içindeki <strong>Profil → Verileri sıfırla</strong> ile bu verilerin tamamını
+istediğin zaman silebilirsin. Uygulamayı silmek de cihazdaki tüm yerel veriyi kaldırır.</p>
+
+<h2>Sohbet (isteğe bağlı) ve Firebase</h2>
+<p>Anonim sohbet özelliğini yalnızca sen başlatırsan çalışır. Kullanırsan, uygulama
+Google'ın <strong>Firebase</strong> servisini kullanır:</p>
+<ul>
+  <li><strong>Anonim Kimlik Doğrulama:</strong> Sana rastgele, anonim bir kimlik atanır.
+      Ad, e-posta veya telefon toplanmaz.</li>
+  <li><strong>Firestore veritabanı</strong> şunları saklar: seçtiğin takma ad, arkadaş kodun,
+      gönderdiğin mesajların ve bir kullanıcıyı şikâyet edersen şikâyet kaydın.</li>
+  <li><strong>Amaç:</strong> mesajlarını yalnızca yazıştığın kişiye ulaştırmak.
+      Mesajların, seçtiğin dışındaki kullanıcılara gösterilmez.</li>
+  <li><strong>Konum:</strong> Veriler Avrupa bölgesinde (Firebase <code>eur3</code>) tutulur.</li>
+  <li><strong>Güvenlik ve moderasyon:</strong> Uygunsuz davranışları <em>engelle</em> ve
+      <em>şikâyet et</em> özellikleriyle bildirebilirsin. Şikâyetler yalnızca moderasyon
+      amacıyla saklanır.</li>
+</ul>
+<p><strong>Hassas veri uyarısı:</strong> Sohbet mesajların ruh sağlığıyla ilgili kişisel
+bilgiler içerebilir. Bu içerikleri paylaşıp paylaşmamak tamamen senin tercihindir.
+Firebase, verileri bizim adımıza işleyen bir hizmet sağlayıcıdır; kullanımı
+<a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Google/Firebase Gizlilik ve Güvenlik</a>
+şartlarına tabidir.</p>
+
+<h2>Toplamadığımız şeyler</h2>
+<ul>
+  <li>Reklam kimliği, konum, kişi listesi veya fotoğraf galerisi taraması yok.</li>
+  <li>Analitik veya çökme takibi SDK'sı yok.</li>
+  <li>Verilerini üçüncü taraflara satmıyor veya pazarlama için paylaşmıyoruz.</li>
+</ul>
+
+<h2>Verilerini silme</h2>
+<ul>
+  <li><strong>Cihaz verisi:</strong> Profil → Verileri sıfırla, ya da uygulamayı sil.</li>
+  <li><strong>Sohbet verisi:</strong> Takma adının ve mesajlarının Firebase'den silinmesini
+      istemek için <a href="mailto:berkanaslandev@gmail.com">berkanaslandev@gmail.com</a>
+      adresine yazabilirsin.</li>
+</ul>
+
+<h2>Çocuklar</h2>
+<p>Uygulama çocuklara yönelik değildir ve 13 yaşından küçüklerden bilerek veri toplamaz.</p>
+
+<h2>Yasal haklar (KVKK / GDPR)</h2>
+<p>Veri sorumlusu: <strong>Berkan Aslan</strong>. İşlenen verilerine erişme, düzeltilmesini
+veya silinmesini isteme hakkına sahipsin. Bu haklarını kullanmak için
+<a href="mailto:berkanaslandev@gmail.com">berkanaslandev@gmail.com</a> ile iletişime geç.</p>
+
+<h2>Değişiklikler</h2>
+<p>Bu politika güncellenebilir; önemli değişikliklerde yürürlük tarihi güncellenir.</p>
+
+<h2>İletişim</h2>
+<p><a href="mailto:berkanaslandev@gmail.com">berkanaslandev@gmail.com</a></p>
+
+<p class="sub" style="margin-top:32px">Not: Self Control tıbbi tanı veya tedavi sağlamaz;
+bilgilendirme ve öz-yardım amaçlıdır. Acil durumda 112'yi arayın.</p>
+</section>
+
+<hr>
+
+<!-- ============================ ENGLISH ============================ -->
+<section id="en">
+<h1>Privacy Policy</h1>
+<p class="sub">Self Control · Effective date: 20 July 2026</p>
+
+<p>Self Control is a mental-health self-help app for OCD, panic, social anxiety and
+general anxiety. We care about your privacy. This policy explains, in plain language,
+what data the app processes and where it is stored.</p>
+
+<h2>Summary</h2>
+<ul>
+  <li><strong>Your tracking data stays on your device.</strong> Moods, anxiety scores,
+      journal entries, exercise and worry logs are stored only on your phone and are never sent to us.</li>
+  <li><strong>No ads, no analytics, no third-party tracking SDKs.</strong></li>
+  <li><strong>One exception: optional Chat.</strong> If you choose to use chat, your chosen
+      username and the messages you send are stored on Firebase (Google) to deliver the
+      conversation. No email or phone number is required.</li>
+  <li>Creating an account requires <strong>no</strong> name, email or phone number.</li>
+</ul>
+
+<h2>Data kept on your device</h2>
+<p>The following is created and stored only on your device (local settings + SwiftData).
+None of it is sent to a server; the developer cannot see it.</p>
+<table>
+  <tr><th>Data</th><th>Why</th><th>Where</th></tr>
+  <tr><td>Your moods and anxiety scores</td><td>Daily tracking and progress charts</td><td>On device (SwiftData)</td></tr>
+  <tr><td>Your journal entries and trigger tags</td><td>Your own records</td><td>On device (SwiftData)</td></tr>
+  <tr><td>Exercise / resistance / worry logs</td><td>Domain modules and statistics</td><td>On device (SwiftData)</td></tr>
+  <tr><td>Your name, chosen areas, preferences, badges</td><td>To personalize the app</td><td>On device (local settings)</td></tr>
+  <tr><td>Reminder time</td><td>Local daily reminder notification</td><td>On device / iOS</td></tr>
+</table>
+<p>You can delete all of this anytime via <strong>Profile → Reset data</strong> in the app.
+Deleting the app also removes all local data.</p>
+
+<h2>Chat (optional) and Firebase</h2>
+<p>The anonymous chat feature only runs if you start it yourself. If you use it, the app
+uses Google's <strong>Firebase</strong>:</p>
+<ul>
+  <li><strong>Anonymous Authentication:</strong> you are given a random, anonymous ID.
+      No name, email or phone is collected.</li>
+  <li><strong>Firestore database</strong> stores: your chosen username, your friend code,
+      the messages you send, and — if you report a user — the report record.</li>
+  <li><strong>Purpose:</strong> to deliver your messages only to the person you are chatting
+      with. Your messages are not shown to users other than the one you choose.</li>
+  <li><strong>Location:</strong> data is kept in the European region (Firebase <code>eur3</code>).</li>
+  <li><strong>Safety and moderation:</strong> you can <em>block</em> and <em>report</em>
+      inappropriate behavior. Reports are stored solely for moderation.</li>
+</ul>
+<p><strong>Sensitive-data note:</strong> your chat messages may contain mental-health-related
+personal information. Whether to share such content is entirely your choice. Firebase is a
+processor acting on our behalf and is subject to
+<a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Google/Firebase Privacy &amp; Security</a>.</p>
+
+<h2>What we do not collect</h2>
+<ul>
+  <li>No advertising ID, location, contacts, or photo-library scanning.</li>
+  <li>No analytics or crash-reporting SDKs.</li>
+  <li>We do not sell your data or share it for marketing.</li>
+</ul>
+
+<h2>Deleting your data</h2>
+<ul>
+  <li><strong>Device data:</strong> Profile → Reset data, or delete the app.</li>
+  <li><strong>Chat data:</strong> to request deletion of your username and messages from
+      Firebase, email <a href="mailto:berkanaslandev@gmail.com">berkanaslandev@gmail.com</a>.</li>
+</ul>
+
+<h2>Children</h2>
+<p>The app is not directed at children and does not knowingly collect data from anyone under 13.</p>
+
+<h2>Your rights (KVKK / GDPR)</h2>
+<p>Data controller: <strong>Berkan Aslan</strong>. You have the right to access, correct or
+delete your data. To exercise these rights, contact
+<a href="mailto:berkanaslandev@gmail.com">berkanaslandev@gmail.com</a>.</p>
+
+<h2>Changes</h2>
+<p>This policy may be updated; the effective date will change for material updates.</p>
+
+<h2>Contact</h2>
+<p><a href="mailto:berkanaslandev@gmail.com">berkanaslandev@gmail.com</a></p>
+
+<p class="sub" style="margin-top:32px">Note: Self Control does not provide medical diagnosis
+or treatment; it is for information and self-help only. In an emergency, call your local
+emergency number.</p>
+</section>
+
+</body>
+</html>
