@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self Control'de arkadaş ekle</title>
+<meta name="description" content="Self Control anonim sohbet daveti. Uygulaman varsa arkadaş ekleme ekranı kodla dolu açılır; yoksa App Store'a yönlendirilirsin.">
+<meta property="og:title" content="Self Control'de beni ekle">
+<meta property="og:description" content="Anonim, destekleyici sohbet. Bağlantıya dokun — arkadaş kodu otomatik dolsun.">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --grad1: #6C5CE7;
+    --grad2: #3FB0A9;
+    --accent: #5B46E5;
+    --text: #1F2430;
+    --muted: #6B7280;
+    --bg: #FFFFFF;
+    --card: #F7F7FB;
+    --border: #E7E7EF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: #9d8cff;
+      --text: #ECECF2;
+      --muted: #9CA3AF;
+      --bg: #14141A;
+      --card: #1E1E27;
+      --border: #2E2E3A;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--text); background: var(--bg); line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    display: flex; flex-direction: column; min-height: 100vh;
+  }
+  .hero {
+    background: linear-gradient(135deg, var(--grad1), var(--grad2));
+    color: #fff; padding: 56px 24px 48px; text-align: center;
+  }
+  .hero .brand {
+    font-size: 15px; font-weight: 700; letter-spacing: 0.14em;
+    opacity: 0.9; margin-bottom: 14px; text-transform: uppercase;
+  }
+  .hero h1 { font-size: clamp(26px, 5vw, 36px); font-weight: 800; letter-spacing: -0.02em; }
+  .hero p { margin-top: 12px; opacity: 0.92; font-size: 16px; }
+
+  main { flex: 1; max-width: 560px; width: 100%; margin: 0 auto; padding: 32px 24px 48px; }
+
+  .code-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px; text-align: center;
+  }
+  .code-label { font-size: 13px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+  .code {
+    font-size: clamp(30px, 8vw, 40px); font-weight: 800; letter-spacing: 0.06em;
+    margin-top: 8px; font-variant-numeric: tabular-nums;
+  }
+
+  .btn {
+    display: block; width: 100%; text-align: center; text-decoration: none;
+    padding: 16px 20px; border-radius: 14px; font-size: 17px; font-weight: 700;
+    margin-top: 16px; border: none; cursor: pointer; font-family: inherit;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-secondary { background: var(--card); color: var(--text); border: 1px solid var(--border); }
+
+  .note { margin-top: 24px; font-size: 14px; color: var(--muted); text-align: center; }
+  .status { margin-top: 18px; font-size: 14px; color: var(--muted); text-align: center; min-height: 22px; }
+  .hidden { display: none; }
+
+  footer {
+    padding: 24px; text-align: center; font-size: 13px; color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="brand">Self Control</div>
+  <h1 id="heroTitle">Sohbet daveti</h1>
+  <p id="heroSub">Anonim, destekleyici bir sohbet — gerçek kimliğin gizli kalır.</p>
+</div>
+
+<main>
+  <!-- Geçerli kod varsa -->
+  <div id="inviteBox" class="hidden">
+    <div class="code-card">
+      <div class="code-label">Arkadaş kodu</div>
+      <div class="code" id="codeText">SC-····</div>
+    </div>
+    <button class="btn btn-primary" id="openBtn">Uygulamada aç</button>
+    <a class="btn btn-secondary" id="storeBtn" href="https://apps.apple.com/app/id6794370200">App Store'dan indir</a>
+    <div class="status" id="status"></div>
+    <p class="note">
+      Uygulaman varsa arkadaş ekleme ekranı bu kodla dolu açılır.
+      Yoksa App Store'a yönlendirilirsin — kurduktan sonra kodu elle girebilirsin.
+    </p>
+  </div>
+
+  <!-- Kod yoksa / geçersizse -->
+  <div id="plainBox" class="hidden">
+    <div class="code-card">
+      <div class="code-label">Self Control</div>
+      <div style="margin-top:8px;font-size:17px;">
+        Kaygı ve panikle baş etmen için araçlar, günlük takip ve anonim akran desteği.
+      </div>
+    </div>
+    <a class="btn btn-primary" href="https://apps.apple.com/app/id6794370200">App Store'dan indir</a>
+  </div>
+</main>
+
+<footer>
+  <a href="../">Gizlilik Politikası</a> · berkanaslandev@gmail.com
+</footer>
+
+<script>
+(function () {
+  var STORE = "https://apps.apple.com/app/id6794370200";
+
+  var params = new URLSearchParams(window.location.search);
+  var code = (params.get("kod") || "").trim().toUpperCase();
+  var isValid = /^SC-[A-Z0-9]{4}$/.test(code);
+
+  var inviteBox = document.getElementById("inviteBox");
+  var plainBox = document.getElementById("plainBox");
+
+  if (!isValid) {
+    // Kod yok ya da bozuk: davet yerine sade tanıtım + indirme göster.
+    document.getElementById("heroTitle").textContent = "Self Control";
+    document.getElementById("heroSub").textContent = "Zorlandığın anlarda yanında olan bir cep arkadaşı.";
+    plainBox.classList.remove("hidden");
+    return;
+  }
+
+  inviteBox.classList.remove("hidden");
+  document.getElementById("codeText").textContent = code;
+
+  var scheme = "selfcontrol://ekle?kod=" + encodeURIComponent(code);
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+              (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+  var status = document.getElementById("status");
+  var leftPage = false;
+
+  // Uygulama açıldıysa sayfa arka plana düşer; o durumda App Store'a atma.
+  function markLeft() { leftPage = true; }
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) markLeft();
+  });
+  window.addEventListener("pagehide", markLeft);
+  window.addEventListener("blur", markLeft);
+
+  function openApp(autoFallback) {
+    if (!isIOS) {
+      // iOS dışında uygulama yok; doğrudan mağazaya.
+      window.location.href = STORE;
+      return;
+    }
+    status.textContent = "Uygulama açılıyor…";
+    if (autoFallback) {
+      setTimeout(function () {
+        if (!leftPage && !document.hidden) {
+          window.location.href = STORE;
+        }
+      }, 1800);
+    }
+    window.location.href = scheme;
+  }
+
+  document.getElementById("openBtn").addEventListener("click", function () {
+    openApp(false); // Elle basıldıysa mağazaya zorlama; kullanıcı zaten seçim yaptı.
+  });
+
+  // Sayfa açılır açılmaz uygulamayı dene; yoksa App Store'a düş.
+  if (isIOS) {
+    setTimeout(function () { openApp(true); }, 400);
+  }
+})();
+</script>
+
+</body>
+</html>
