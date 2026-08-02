@@ -73,12 +73,12 @@
 </header>
 
 <main>
-  <p class="effective">Yürürlük tarihi: 20 Temmuz 2026</p>
+  <p class="effective">Yürürlük tarihi: 2 Ağustos 2026</p>
 
   <div class="summary">
     <h2>Kısa özet</h2>
     <ul>
-      <li><strong>Takip verilerin cihazında kalır.</strong> Ruh hali, kaygı puanı, günlük yazıların ve kayıtların yalnızca telefonunda saklanır; bize gönderilmez.</li>
+      <li><strong>Takip verilerin cihazında kalır.</strong> Ruh hali, kaygı puanı, günlük yazıların ve kayıtların yalnızca telefonunda saklanır; bize gönderilmez. (Tek istisna: sohbette <em>Biriyle eşleş</em> özelliğini kullanırsan odak alanın eşleşme süresince geçici olarak sunucuya yazılır.)</li>
       <li><strong>Reklam yok, analytics yok, üçüncü taraf takip (tracking) yok.</strong></li>
       <li><strong>Tek istisna: isteğe bağlı Sohbet.</strong> Kullanmayı seçersen takma adın ve mesajların Firebase'de (Google) saklanır. E-posta veya telefon istemez.</li>
       <li>Hesap için ad, e-posta veya telefon <strong>gerekmez</strong>.</li>
@@ -112,6 +112,8 @@
     <li><strong>Amaç:</strong> mesajlarını yalnızca yazıştığın kişiye ulaştırmak. Mesajların, seçtiğin dışındaki kullanıcılara gösterilmez.</li>
     <li><strong>Konum:</strong> veriler Avrupa bölgesinde (Firebase <code>eur3</code>) tutulur.</li>
     <li><strong>Güvenlik ve moderasyon:</strong> uygunsuz davranışları <em>engelle</em> ve <em>şikâyet et</em> ile bildirebilirsin.</li>
+    <li><strong>Bildirimler:</strong> mesaj bildirimi alabilmen için cihazının bildirim kimliği (token) profilinde saklanır. Bildirimlere izin vermezsen bu bilgi hiç yazılmaz.</li>
+    <li><strong>Eşleştirme (isteğe bağlı):</strong> <em>Biriyle eşleş</em> dersen, benzer birini bulabilmemiz için <strong>seçtiğin odak alanı</strong> (ör. panik atak) geçici olarak bekleme sırasına yazılır. Bu kayıt yalnızca bunu ve zaman bilgisini içerir; takma adın yazılmaz, <strong>eşleşme kurulunca silinir</strong> ve <strong>kimse bekleme sırasını göremez</strong>. Vazgeçersen kayıt hemen silinir.</li>
   </ul>
   <div class="note"><strong>Hassas veri uyarısı:</strong> Sohbet mesajların ruh sağlığıyla
   ilgili kişisel bilgiler içerebilir. Bu içerikleri paylaşıp paylaşmamak tamamen senin
