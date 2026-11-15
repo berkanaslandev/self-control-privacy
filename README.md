@@ -1,6 +1,7 @@
 # Self Control — Privacy Policy
 
-Public site that hosts the privacy policy for the Self Control iOS app
-(App Store privacy URL + in-app link). Served via GitHub Pages.
+Public site that hosts the privacy policy for the Self Control iOS and Android
+apps (App Store / Google Play privacy URL + in-app link) and the friend-invite
+landing page (`ekle/`). Served via GitHub Pages.
 
 Live: https://berkanaslandev.github.io/self-control-privacy/

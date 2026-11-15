@@ -73,14 +73,14 @@
 </header>
 
 <main>
-  <p class="effective">Yürürlük tarihi: 2 Ağustos 2026</p>
+  <p class="effective">Yürürlük tarihi: 15 Kasım 2026</p>
 
   <div class="summary">
     <h2>Kısa özet</h2>
     <ul>
       <li><strong>Takip verilerin cihazında kalır.</strong> Ruh hali, kaygı puanı, günlük yazıların ve kayıtların yalnızca telefonunda saklanır; bize gönderilmez. (Tek istisna: sohbette <em>Biriyle eşleş</em> özelliğini kullanırsan odak alanın eşleşme süresince geçici olarak sunucuya yazılır.)</li>
       <li><strong>Reklam yok, analytics yok, üçüncü taraf takip (tracking) yok.</strong></li>
-      <li><strong>Tek istisna: isteğe bağlı Sohbet.</strong> Kullanmayı seçersen takma adın ve mesajların Firebase'de (Google) saklanır. E-posta veya telefon istemez.</li>
+      <li><strong>Tek istisna: isteğe bağlı Sohbet.</strong> Kullanmayı seçersen takma adın ve mesajların Firebase'de (Google) saklanır. E-posta veya telefon istemez. <strong>Bize ulaş</strong> formundan yazarsan mesajın da bize iletilir.</li>
       <li>Hesap için ad, e-posta veya telefon <strong>gerekmez</strong>.</li>
     </ul>
   </div>
@@ -90,31 +90,42 @@
   nerede sakladığını sade bir dille açıklar.</p>
 
   <h2>Cihazında kalan veriler</h2>
-  <p>Aşağıdakiler yalnızca cihazında oluşturulur ve saklanır (yerel ayarlar + SwiftData).
-  Hiçbiri sunucuya gönderilmez; geliştirici bunları göremez.</p>
+  <p>Aşağıdakiler yalnızca cihazında oluşturulur ve saklanır (iOS'ta yerel ayarlar + SwiftData,
+  Android'de yerel veritabanı + DataStore). Hiçbiri bizim sunucumuza gönderilmez; geliştirici bunları göremez.</p>
   <table>
     <tr><th>Veri</th><th>Neden</th><th>Nerede</th></tr>
     <tr><td>Ruh hali ve kaygı puanların</td><td>Günlük takip ve ilerleme grafikleri</td><td>Cihazda</td></tr>
     <tr><td>Günlük yazıların ve tetikleyici etiketlerin</td><td>Kendi kayıtların</td><td>Cihazda</td></tr>
     <tr><td>Egzersiz / direnç / endişe kayıtların</td><td>Alan-özel modüller ve istatistikler</td><td>Cihazda</td></tr>
     <tr><td>Adın, seçtiğin alanlar, tercihlerin, rozetlerin</td><td>Uygulamayı kişiselleştirmek</td><td>Cihazda</td></tr>
-    <tr><td>Hatırlatma saati</td><td>Yerel günlük hatırlatma bildirimi</td><td>Cihazda / iOS</td></tr>
+    <tr><td>Hatırlatma saati</td><td>Yerel günlük hatırlatma ve sabah "günün sözü" bildirimi</td><td>Cihazda</td></tr>
   </table>
   <p><strong>Profil → Verileri sıfırla</strong> ile bu verilerin tamamını istediğin zaman
   silebilirsin. Uygulamayı silmek de cihazdaki tüm yerel veriyi kaldırır.</p>
+  <p><strong>Android yedeklemesi:</strong> Android'de bu veriler, telefonunun yedekleme ayarı açıksa
+  Android'in kendi otomatik yedeklemesiyle <strong>senin Google hesabına</strong> yedeklenir; böylece yeni
+  bir telefonda geri yüklenebilir. Yedek Google tarafından şifrelenir; geliştirici bu yedeğe erişemez.
+  Yedeklemeyi telefonunun <em>Ayarlar → Sistem → Yedekleme</em> bölümünden kapatabilir, mevcut yedeği
+  Google hesabından silebilirsin.</p>
 
   <h2>Sohbet (isteğe bağlı) ve Firebase</h2>
   <p>Anonim sohbet özelliği yalnızca sen başlatırsan çalışır. Kullanırsan, uygulama
   Google'ın <strong>Firebase</strong> servisini kullanır:</p>
   <ul>
     <li><strong>Anonim Kimlik Doğrulama:</strong> sana rastgele, anonim bir kimlik atanır. Ad, e-posta veya telefon toplanmaz.</li>
-    <li><strong>Firestore veritabanı</strong> şunları saklar: seçtiğin takma ad, arkadaş kodun, gönderdiğin mesajlar ve bir kullanıcıyı şikâyet edersen şikâyet kaydın.</li>
+    <li><strong>Firestore veritabanı</strong> şunları saklar: seçtiğin takma ad, arkadaş kodun, gönderdiğin mesajlar ve bir kullanıcıyı şikâyet edersen şikâyet kaydın (sebep, isteğe bağlı açıklama ve kanıt olarak seçtiğin ekran görüntüsü; yalnızca moderasyon için. Gizliliğin için yazışmalar okunmaz, bu yüzden kanıtı sen seçersin).</li>
     <li><strong>Amaç:</strong> mesajlarını yalnızca yazıştığın kişiye ulaştırmak. Mesajların, seçtiğin dışındaki kullanıcılara gösterilmez.</li>
     <li><strong>Konum:</strong> veriler Avrupa bölgesinde (Firebase <code>eur3</code>) tutulur.</li>
+    <li><strong>Uygulama doğrulaması:</strong> sohbet sunucusuna yalnızca gerçek Self Control uygulamasının bağlanabilmesi için Firebase App Check kullanılır (iOS'ta Apple App Attest, Android'de Google Play Integrity). Bu kontrol takma adını veya mesajlarını içermez.</li>
     <li><strong>Güvenlik ve moderasyon:</strong> uygunsuz davranışları <em>engelle</em> ve <em>şikâyet et</em> ile bildirebilirsin.</li>
-    <li><strong>Bildirimler:</strong> mesaj bildirimi alabilmen için cihazının bildirim kimliği (token) profilinde saklanır. Bildirimlere izin vermezsen bu bilgi hiç yazılmaz.</li>
+    <li><strong>Bildirimler:</strong> mesaj bildirimi alabilmen için cihazının bildirim kimliği (token; iOS'ta Apple, Android'de Google bildirim servisi) profilinde saklanır. Bildirimlere izin vermezsen bu bilgi hiç yazılmaz.</li>
     <li><strong>Eşleştirme (isteğe bağlı):</strong> <em>Biriyle eşleş</em> dersen, benzer birini bulabilmemiz için <strong>seçtiğin odak alanı</strong> (ör. panik atak) geçici olarak bekleme sırasına yazılır. Bu kayıt yalnızca bunu ve zaman bilgisini içerir; takma adın yazılmaz, <strong>eşleşme kurulunca silinir</strong> ve <strong>kimse bekleme sırasını göremez</strong>. Vazgeçersen kayıt hemen silinir.</li>
   </ul>
+
+  <h2>Geri bildirim formu (isteğe bağlı)</h2>
+  <p><strong>Profil → Bize ulaş</strong> ile yazdığın mesaj, seçtiğin konu, istersen bıraktığın
+  e-posta adresi ve uygulama sürümü Firebase'e kaydedilir ve geliştiriciye e-posta olarak iletilir.
+  Amaç yalnızca sorununa ya da önerine yanıt vermek; e-posta adresi zorunlu değildir.</p>
   <div class="note"><strong>Hassas veri uyarısı:</strong> Sohbet mesajların ruh sağlığıyla
   ilgili kişisel bilgiler içerebilir. Bu içerikleri paylaşıp paylaşmamak tamamen senin
   tercihindir. Firebase, verileri bizim adımıza işleyen bir hizmet sağlayıcıdır;
@@ -129,8 +140,8 @@
 
   <h2>Verilerini silme</h2>
   <ul>
-    <li><strong>Cihaz verisi:</strong> Profil → Verileri sıfırla, ya da uygulamayı sil.</li>
-    <li><strong>Sohbet verisi:</strong> Profil → <em>Sohbet verimi sil</em> ile takma adın, arkadaş kodun ve tüm yazışmaların sunucudan kalıcı olarak silinir. Dilersen <a href="mailto:berkanaslandev@gmail.com">berkanaslandev@gmail.com</a> adresinden de talep edebilirsin.</li>
+    <li><strong>Cihaz verisi:</strong> Profil → Verileri sıfırla, ya da uygulamayı sil. Android'de Google hesabındaki yedek ayrıca durabilir; onu telefonunun yedekleme ayarlarından ya da Google hesabından silebilirsin.</li>
+    <li><strong>Sohbet verisi:</strong> Profil → <em>Sohbet verimi sil</em> ile takma adın, arkadaş kodun ve tüm yazışmaların sunucudan kalıcı olarak silinir. <em>Bize ulaş</em> formuyla gönderdiklerinin silinmesini ve dilersen sohbet verinin silinmesini <a href="mailto:berkanaslandev@gmail.com">berkanaslandev@gmail.com</a> adresinden talep edebilirsin.</li>
   </ul>
 
   <h2>Çocuklar</h2>

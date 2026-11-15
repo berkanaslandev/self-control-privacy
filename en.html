@@ -73,14 +73,14 @@
 </header>
 
 <main>
-  <p class="effective">Effective date: 2 August 2026</p>
+  <p class="effective">Effective date: 15 November 2026</p>
 
   <div class="summary">
     <h2>Summary</h2>
     <ul>
       <li><strong>Your tracking data stays on your device.</strong> Moods, anxiety scores, journal entries and logs are stored only on your phone and are never sent to us. (One exception: if you use <em>Match me with someone</em> in chat, your focus area is written to the server temporarily while you wait.)</li>
       <li><strong>No ads, no analytics, no third-party tracking.</strong></li>
-      <li><strong>One exception: optional Chat.</strong> If you choose to use it, your chosen username and messages are stored on Firebase (Google). No email or phone required.</li>
+      <li><strong>One exception: optional Chat.</strong> If you choose to use it, your chosen username and messages are stored on Firebase (Google). No email or phone required. If you write to us via the <strong>Contact us</strong> form, your message is forwarded to us too.</li>
       <li>Creating an account requires <strong>no</strong> name, email or phone number.</li>
     </ul>
   </div>
@@ -90,7 +90,7 @@
   and where it is stored.</p>
 
   <h2>Data kept on your device</h2>
-  <p>The following is created and stored only on your device (local settings + SwiftData).
+  <p>The following is created and stored only on your device (local settings + SwiftData on iOS, a local database + DataStore on Android).
   None of it is sent to a server; the developer cannot see it.</p>
   <table>
     <tr><th>Data</th><th>Why</th><th>Where</th></tr>
@@ -98,23 +98,35 @@
     <tr><td>Your journal entries and trigger tags</td><td>Your own records</td><td>On device</td></tr>
     <tr><td>Exercise / resistance / worry logs</td><td>Domain modules and statistics</td><td>On device</td></tr>
     <tr><td>Your name, chosen areas, preferences, badges</td><td>To personalize the app</td><td>On device</td></tr>
-    <tr><td>Reminder time</td><td>Local daily reminder notification</td><td>On device / iOS</td></tr>
+    <tr><td>Reminder time</td><td>Local daily reminder and morning "quote of the day" notification</td><td>On device</td></tr>
   </table>
   <p>You can delete all of this anytime via <strong>Profile → Reset data</strong>.
   Deleting the app also removes all local data.</p>
+  <p><strong>Android backup:</strong> on Android, if your phone's backup setting is on, this data is
+  backed up to <strong>your own Google account</strong> by Android's automatic backup, so it can be
+  restored on a new phone. The backup is encrypted by Google; the developer cannot access it. You can
+  turn backup off under <em>Settings → System → Backup</em> and delete the existing backup from your
+  Google account.</p>
 
   <h2>Chat (optional) and Firebase</h2>
   <p>The anonymous chat feature only runs if you start it yourself. If you use it, the app
   uses Google's <strong>Firebase</strong>:</p>
   <ul>
     <li><strong>Anonymous Authentication:</strong> you are given a random, anonymous ID. No name, email or phone is collected.</li>
-    <li><strong>Firestore database</strong> stores: your chosen username, your friend code, the messages you send, and — if you report a user — the report record.</li>
+    <li><strong>Firestore database</strong> stores: your chosen username, your friend code, the messages you send, and — if you report a user — the report record (the reason, an optional note and the screenshot you pick as evidence; used for moderation only. Conversations are not read for privacy, which is why you choose the evidence).</li>
     <li><strong>Purpose:</strong> to deliver your messages only to the person you are chatting with. Your messages are not shown to users other than the one you choose.</li>
     <li><strong>Location:</strong> data is kept in the European region (Firebase <code>eur3</code>).</li>
+    <li><strong>App verification:</strong> Firebase App Check is used so that only the genuine Self Control app can connect to the chat server (Apple App Attest on iOS, Google Play Integrity on Android). This check does not include your username or messages.</li>
     <li><strong>Safety and moderation:</strong> you can <em>block</em> and <em>report</em> inappropriate behavior.</li>
-    <li><strong>Notifications:</strong> so you can be alerted about new messages, your device's notification token is stored on your profile. If you deny notification permission, it is never written.</li>
+    <li><strong>Notifications:</strong> so you can be alerted about new messages, your device's notification token (from Apple's push service on iOS, Google's on Android) is stored on your profile. If you deny notification permission, it is never written.</li>
     <li><strong>Matching (optional):</strong> if you tap <em>Match me with someone</em>, your <strong>focus area</strong> (e.g. panic attacks) is written to a waiting queue so we can find someone similar. That record holds only this and a timestamp — not your nickname — it is <strong>deleted as soon as a match is made</strong>, and <strong>nobody can view the queue</strong>. Cancelling deletes it immediately.</li>
   </ul>
+
+  <h2>Feedback form (optional)</h2>
+  <p>When you write to us via <strong>Profile → Contact us</strong>, your message, the topic you pick,
+  the email address you optionally leave and the app version are stored on Firebase and forwarded to the
+  developer by email. They are used only to answer your question or suggestion; an email address is
+  not required.</p>
   <div class="note"><strong>Sensitive-data note:</strong> your chat messages may contain
   mental-health-related personal information. Whether to share such content is entirely
   your choice. Firebase is a processor acting on our behalf and is subject to
@@ -129,8 +141,8 @@
 
   <h2>Deleting your data</h2>
   <ul>
-    <li><strong>Device data:</strong> Profile → Reset data, or delete the app.</li>
-    <li><strong>Chat data:</strong> Profile → <em>Delete my chat data</em> permanently removes your username, friend code and all conversations from the server. You can also request this at <a href="mailto:berkanaslandev@gmail.com">berkanaslandev@gmail.com</a>.</li>
+    <li><strong>Device data:</strong> Profile → Reset data, or delete the app. On Android, the backup in your Google account may remain; you can delete it from your phone's backup settings or your Google account.</li>
+    <li><strong>Chat data:</strong> Profile → <em>Delete my chat data</em> permanently removes your username, friend code and all conversations from the server. You can also request this — or deletion of what you sent via the <em>Contact us</em> form — at <a href="mailto:berkanaslandev@gmail.com">berkanaslandev@gmail.com</a>.</li>
   </ul>
 
   <h2>Children</h2>
