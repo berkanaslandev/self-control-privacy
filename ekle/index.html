@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Self Control'de arkadaş ekle</title>
 <meta name="description" content="Self Control anonim sohbet daveti. Uygulaman varsa arkadaş ekleme ekranı kodla dolu açılır; yoksa uygulama mağazasına (App Store / Google Play) yönlendirilirsin.">
-<meta property="og:title" content="Self Control'de beni ekle">
-<meta property="og:description" content="Anonim, destekleyici sohbet. Bağlantıya dokun — arkadaş kodu otomatik dolsun.">
+<!-- Bağlantı önizlemeleri JS çalıştırmaz: başlık ve açıklama iki dilde. -->
+<meta property="og:title" content="Self Control'de beni ekle · Add me on Self Control">
+<meta property="og:description" content="Anonim, destekleyici sohbet. · An anonymous, supportive chat. Tap the link to add me.">
 <meta property="og:type" content="website">
 <style>
   :root {
@@ -82,22 +83,22 @@
 
 <div class="hero">
   <div class="brand">Self Control</div>
-  <h1 id="heroTitle">Sohbet daveti</h1>
-  <p id="heroSub">Anonim, destekleyici bir sohbet — gerçek kimliğin gizli kalır.</p>
+  <h1 id="heroTitle" data-i18n="heroTitle">Sohbet daveti</h1>
+  <p id="heroSub" data-i18n="heroSub">Anonim, destekleyici bir sohbet — gerçek kimliğin gizli kalır.</p>
 </div>
 
 <main>
   <!-- Geçerli kod varsa -->
   <div id="inviteBox" class="hidden">
     <div class="code-card">
-      <div class="code-label">Arkadaş kodu</div>
+      <div class="code-label" data-i18n="codeLabel">Arkadaş kodu</div>
       <div class="code" id="codeText">SC-····</div>
     </div>
-    <button class="btn btn-primary" id="openBtn">Uygulamada aç</button>
-    <a class="btn btn-secondary store-ios" href="https://apps.apple.com/app/id6794370200">App Store'dan indir</a>
-    <a class="btn btn-secondary store-android" href="https://play.google.com/store/apps/details?id=com.berkanaslan.selfcontrol">Google Play'den indir</a>
+    <button class="btn btn-primary" id="openBtn" data-i18n="openBtn">Uygulamada aç</button>
+    <a class="btn btn-secondary store-ios" data-i18n="appStore" href="https://apps.apple.com/app/id6794370200">App Store'dan indir</a>
+    <a class="btn btn-secondary store-android" data-i18n="playStore" href="https://play.google.com/store/apps/details?id=com.berkanaslan.selfcontrol">Google Play'den indir</a>
     <div class="status" id="status"></div>
-    <p class="note">
+    <p class="note" data-i18n="note">
       Uygulaman varsa arkadaş ekleme ekranı bu kodla dolu açılır.
       Yoksa uygulama mağazasına yönlendirilirsin — kurduktan sonra kodu elle girebilirsin.
     </p>
@@ -107,17 +108,17 @@
   <div id="plainBox" class="hidden">
     <div class="code-card">
       <div class="code-label">Self Control</div>
-      <div style="margin-top:8px;font-size:17px;">
+      <div style="margin-top:8px;font-size:17px;" data-i18n="plainText">
         Kaygı ve panikle baş etmen için araçlar, günlük takip ve anonim akran desteği.
       </div>
     </div>
-    <a class="btn btn-primary store-ios" href="https://apps.apple.com/app/id6794370200">App Store'dan indir</a>
-    <a class="btn btn-primary store-android" href="https://play.google.com/store/apps/details?id=com.berkanaslan.selfcontrol">Google Play'den indir</a>
+    <a class="btn btn-primary store-ios" data-i18n="appStore" href="https://apps.apple.com/app/id6794370200">App Store'dan indir</a>
+    <a class="btn btn-primary store-android" data-i18n="playStore" href="https://play.google.com/store/apps/details?id=com.berkanaslan.selfcontrol">Google Play'den indir</a>
   </div>
 </main>
 
 <footer>
-  <a href="../">Gizlilik Politikası</a> · berkanaslandev@gmail.com
+  <a href="../" id="privacyLink" data-i18n="privacy">Gizlilik Politikası</a> · berkanaslandev@gmail.com
 </footer>
 
 <script>
@@ -125,6 +126,133 @@
   var APP_STORE = "https://apps.apple.com/app/id6794370200";
   var PLAY_STORE = "https://play.google.com/store/apps/details?id=com.berkanaslan.selfcontrol";
   var ANDROID_PACKAGE = "com.berkanaslan.selfcontrol";
+
+  // Sayfa tarayıcının diliyle açılır: Türkçe (HTML'deki metin), uygulamanın diğer dilleri
+  // ya da bunların dışındaki her dilde İngilizce.
+  var I18N = {
+    "en": {
+      "title": "Add a friend on Self Control",
+      "heroTitle": "Chat invite",
+      "heroSub": "An anonymous, supportive chat — your real identity stays private.",
+      "codeLabel": "Friend code",
+      "openBtn": "Open in the app",
+      "appStore": "Download on the App Store",
+      "playStore": "Get it on Google Play",
+      "note": "If you have the app, the add-friend screen opens with this code filled in. If not, you'll be taken to the app store — after installing, you can enter the code yourself.",
+      "plainText": "Tools for coping with anxiety and panic, daily tracking and anonymous peer support.",
+      "plainSub": "A pocket companion that stays with you when things get hard.",
+      "privacy": "Privacy Policy",
+      "opening": "Opening the app…",
+      "openOnPhone": "Open this link on your phone."
+    },
+    "de": {
+      "title": "Füge mich bei Self Control hinzu",
+      "heroTitle": "Chat-Einladung",
+      "heroSub": "Ein anonymer, unterstützender Chat – deine echte Identität bleibt geheim.",
+      "codeLabel": "Freundescode",
+      "openBtn": "In der App öffnen",
+      "appStore": "Laden im App Store",
+      "playStore": "Jetzt bei Google Play",
+      "note": "Wenn du die App hast, öffnet sich der Bildschirm zum Hinzufügen mit diesem Code. Wenn nicht, wirst du zum App Store weitergeleitet – nach der Installation kannst du den Code selbst eingeben.",
+      "plainText": "Hilfen bei Angst und Panik, tägliche Check-ins und anonyme Unterstützung von Menschen, die Ähnliches erleben.",
+      "plainSub": "Ein Begleiter für die Hosentasche, der da ist, wenn es schwer wird.",
+      "privacy": "Datenschutzerklärung",
+      "opening": "App wird geöffnet …",
+      "openOnPhone": "Öffne diesen Link auf deinem Handy."
+    },
+    "es": {
+      "title": "Invitación de amistad en Self Control",
+      "heroTitle": "Invitación al chat",
+      "heroSub": "Un chat anónimo y de apoyo: tu identidad real se mantiene en privado.",
+      "codeLabel": "Código de amistad",
+      "openBtn": "Abrir en la app",
+      "appStore": "Descárgalo en el App Store",
+      "playStore": "Disponible en Google Play",
+      "note": "Si ya tienes la app, se abrirá la pantalla para añadir amigos con este código ya escrito. Si no, irás a la tienda de apps; después de instalarla, podrás introducir el código manualmente.",
+      "plainText": "Herramientas para afrontar la ansiedad y el pánico, seguimiento diario y apoyo anónimo entre iguales.",
+      "plainSub": "Un compañero de bolsillo que te acompaña en los momentos difíciles.",
+      "privacy": "Política de privacidad",
+      "opening": "Abriendo la app…",
+      "openOnPhone": "Abre este enlace en tu teléfono."
+    },
+    "zh-Hans": {
+      "title": "在 Self Control 上添加好友",
+      "heroTitle": "聊天邀请",
+      "heroSub": "匿名、温暖的支持聊天——你的真实身份不会公开。",
+      "codeLabel": "好友码",
+      "openBtn": "在 App 中打开",
+      "appStore": "在 App Store 下载",
+      "playStore": "在 Google Play 下载",
+      "note": "如果你已安装 App，添加好友页面会自动填好此好友码。如果尚未安装，你将被带到应用商店——安装后，你可以手动输入好友码。",
+      "plainText": "应对焦虑和惊恐的工具、每日记录和匿名互助交流。",
+      "plainSub": "在艰难时刻陪伴你的口袋伙伴。",
+      "privacy": "隐私政策",
+      "opening": "正在打开 App…",
+      "openOnPhone": "请在手机上打开此链接。"
+    },
+    "ru": {
+      "title": "Добавь друга в Self Control",
+      "heroTitle": "Приглашение в чат",
+      "heroSub": "Анонимный чат поддержки — твоя настоящая личность остаётся в тайне.",
+      "codeLabel": "Код друга",
+      "openBtn": "Открыть в приложении",
+      "appStore": "Загрузите в App Store",
+      "playStore": "Доступно в Google Play",
+      "note": "Если приложение установлено, откроется экран добавления друга с уже введённым кодом. Если нет — ты попадёшь в магазин приложений, а после установки сможешь ввести код вручную.",
+      "plainText": "Инструменты, которые помогают справляться с тревогой и паникой, ежедневные отметки и анонимная поддержка от людей с похожим опытом.",
+      "plainSub": "Карманный друг, который рядом, когда тяжело.",
+      "privacy": "Политика конфиденциальности",
+      "opening": "Открываем приложение…",
+      "openOnPhone": "Открой эту ссылку на телефоне."
+    },
+    "uk": {
+      "title": "Додай друга в Self Control",
+      "heroTitle": "Запрошення до чату",
+      "heroSub": "Анонімний чат підтримки — твоя справжня особа залишається прихованою.",
+      "codeLabel": "Код друга",
+      "openBtn": "Відкрити в застосунку",
+      "appStore": "Завантажити в App Store",
+      "playStore": "Завантажити з Google Play",
+      "note": "Якщо застосунок уже встановлено, відкриється екран додавання друга з цим кодом. Якщо ні — тебе буде перенаправлено до магазину застосунків; після встановлення код можна ввести вручну.",
+      "plainText": "Інструменти, що допомагають упоратися з тривогою та панікою, щоденне відстеження й анонімна підтримка від людей зі схожим досвідом.",
+      "plainSub": "Кишеньковий друг, який буде поруч, коли тобі важко.",
+      "privacy": "Політика конфіденційності",
+      "opening": "Відкриваємо застосунок…",
+      "openOnPhone": "Відкрий це посилання на телефоні."
+    },
+    "cs": {
+      "title": "Přidej si přítele v aplikaci Self Control",
+      "heroTitle": "Pozvánka do chatu",
+      "heroSub": "Anonymní chat plný podpory – tvoje skutečná identita zůstane skrytá.",
+      "codeLabel": "Kód přítele",
+      "openBtn": "Otevřít v aplikaci",
+      "appStore": "Stáhnout v App Storu",
+      "playStore": "Nyní na Google Play",
+      "note": "Pokud aplikaci máš, otevře se obrazovka pro přidání přítele s už vyplněným kódem. Pokud ne, přesměrujeme tě do obchodu s aplikacemi – po instalaci stačí kód zadat ručně.",
+      "plainText": "Nástroje, které pomáhají zvládat úzkost a paniku, každodenní sledování a anonymní vzájemná podpora.",
+      "plainSub": "Kapesní parťák, který je s tebou, když je těžko.",
+      "privacy": "Zásady ochrany soukromí",
+      "opening": "Otevírám aplikaci…",
+      "openOnPhone": "Otevři tento odkaz v telefonu."
+    }
+  };
+  var langs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""];
+  var first = (langs[0] || "").toLowerCase();
+  var code = /^tr\b/.test(first) ? "tr"
+    : /^zh\b/.test(first) ? "zh-Hans"
+    : (I18N[first.split("-")[0]] ? first.split("-")[0] : "en");
+  var T = I18N[code];
+  function t(key, tr) { return T ? T[key] : tr; }
+  if (T) {
+    document.documentElement.lang = code;
+    document.title = T.title;
+    var nodes = document.querySelectorAll("[data-i18n]");
+    for (var n = 0; n < nodes.length; n++) {
+      var k = nodes[n].getAttribute("data-i18n");
+      if (T[k]) nodes[n].textContent = T[k];
+    }
+    document.getElementById("privacyLink").setAttribute("href", "../en.html");
+  }
 
   var ua = navigator.userAgent;
   var isIOS = /iPad|iPhone|iPod/.test(ua) ||
@@ -149,7 +277,7 @@
   if (!isValid) {
     // Kod yok ya da bozuk: davet yerine sade tanıtım + indirme göster.
     document.getElementById("heroTitle").textContent = "Self Control";
-    document.getElementById("heroSub").textContent = "Zorlandığın anlarda yanında olan bir cep arkadaşı.";
+    document.getElementById("heroSub").textContent = t("plainSub", "Zorlandığın anlarda yanında olan bir cep arkadaşı.");
     plainBox.classList.remove("hidden");
     return;
   }
@@ -178,16 +306,16 @@
 
   function openApp(autoFallback) {
     if (isAndroid) {
-      status.textContent = "Uygulama açılıyor…";
+      status.textContent = t("opening", "Uygulama açılıyor…");
       window.location.href = androidIntent;
       return;
     }
     if (!isIOS) {
       // Masaüstü: uygulama yok; iki mağaza düğmesi zaten görünüyor.
-      status.textContent = "Bu bağlantıyı telefonunda aç.";
+      status.textContent = t("openOnPhone", "Bu bağlantıyı telefonunda aç.");
       return;
     }
-    status.textContent = "Uygulama açılıyor…";
+    status.textContent = t("opening", "Uygulama açılıyor…");
     if (autoFallback) {
       setTimeout(function () {
         if (!leftPage && !document.hidden) {
